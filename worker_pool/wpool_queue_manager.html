@@ -27,31 +27,23 @@
         
 
 <h1>wpool_queue_manager</h1>
-<h2 class="modsummary"/>
+<h2 class="modsummary">Queue manager for available_worker strategy.</h2>
 <div class="description">
-</div>
+<p>Queue manager for available_worker strategy.</p></div>
 <div id="types" class="category"><h4><a href="#types">Types</a></h4><hr />
-    <div class="type"><h3 id="type-call_request">call_request() = {available_worker, infinity | integer() >= 1}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| worker_counts</h3></div>
-    <div class="type"><h3 id="type-from">from() = {pid(), reference()}</h3></div>
     <div class="type"><h3 id="type-pool_prop">pool_prop() = {pool, <a href="wpool.html#type-name" class="seealso">wpool:name()</a>}</h3></div>
     <div class="type"><h3 id="type-pool_props">pool_props() = [<a href="#type-pool_prop" class="seealso">pool_prop()</a> | <a href="#type-qm_prop" class="seealso">qm_prop()</a>]</h3></div>
     <div class="type"><h3 id="type-qm_prop">qm_prop() = {queue_manager, <a href="#type-queue_mgr" class="seealso">queue_mgr()</a>}</h3></div>
-    <div class="type"><h3 id="type-queue_mgr">queue_mgr() = atom()</h3></div>
-    <div class="type"><h3 id="type-state">state() = <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#state{wpool = undefined | <a href="wpool.html#type-name" class="seealso">wpool:name()</a>,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clients = undefined<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a href="queue.html#type-queue" class="seealso">queue:queue</a>({cast | {pid(), term()}, term()}),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workers = undefined | <a href="gb_sets.html#type-set" class="seealso">gb_sets:set</a>(atom()),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;born = <a href="erlang.html#type-timestamp" class="seealso">erlang:timestamp()</a>}</h3></div>
-    <div class="type"><h3 id="type-worker_event">worker_event() = new_worker<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| worker_dead<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| worker_busy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| worker_ready</h3></div></div>
+    <div class="type"><h3 id="type-queue_mgr">queue_mgr() = atom()</h3></div></div>
 <div id="functions" class="category"><h4><a href="#functions">Functions</a></h4><hr />
-<div class="function">
-<h3 id="start_link/1">start_link(WPool::name() (see module wpool), Name::queue_mgr()) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</h3>
-
-
-<div class="description">
- </div></div>
 <div class="function">
 <h3 id="available_worker/1">available_worker(QueueManager::queue_mgr(), Timeout::timeout()) -&gt; noproc | timeout | atom()</h3>
 
 
 <div class="description">
- </div></div>
+
+<p>returns the first available worker in the pool</p>
+</div></div>
 <div class="function">
 <h3 id="cast_to_available_worker/1">cast_to_available_worker(QueueManager::queue_mgr(), Cast::term()) -&gt; ok</h3>
 
@@ -142,47 +134,12 @@
 <div class="description">
 
 <p>Turn pool tracing on and off.</p>
-</div></div>
-<div class="function">
-<h3 id="init/1">init(WPool::name() (see module wpool)) -&gt; {ok, state()}</h3>
-
-
-<div class="description">
- </div></div>
-<div class="function">
-<h3 id="handle_cast/1">handle_cast(X1::{worker_event(), atom()}, State::state()) -&gt; {noreply, state()}</h3>
-
-
-<div class="description">
- </div></div>
-<div class="function">
-<h3 id="handle_call/1">handle_call(X1::call_request(), Client::from(), State::state()) -&gt; {reply, {ok, atom()}, state()} | {noreply, state()}</h3>
-
-
-<div class="description">
- </div></div>
-<div class="function">
-<h3 id="handle_info/1">handle_info(Info::any(), State::state()) -&gt; {noreply, state()}</h3>
-
-
-<div class="description">
- </div></div>
-<div class="function">
-<h3 id="terminate/1">terminate(Reason::atom(), State::state()) -&gt; ok</h3>
-
-
-<div class="description">
- </div></div>
-<div class="function">
-<h3 id="code_change/1">code_change(OldVsn::string(), State::state(), Extra::any()) -&gt; {ok, state()}</h3>
-
-
-<div class="description">
- </div></div></div>
+</div></div></div>
 
 <authors>
-<aname> </aname>
-<email> </email></authors>
+
+<aname>Fernando Benavides</aname>
+<email>elbrujohalcon@inaka.net</email></authors>
       </div>
   </div>
 

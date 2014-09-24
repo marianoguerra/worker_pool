@@ -13,10 +13,10 @@
 <file>wpool_process.xml</file></header>
 <module>wpool_process</module>
 <modulesummary>Decorator over gen_server that lets wpool_pool
-       control certain aspects of the execution.</modulesummary>
+        control certain aspects of the execution.</modulesummary>
 <description>
 <p>Decorator over <seealso marker="gen_server">gen_server</seealso> that lets <seealso marker="wpool_pool">wpool_pool</seealso>
-       control certain aspects of the execution</p></description>
+        control certain aspects of the execution</p></description>
 <funcs>
 <func>
 <name>start_link(Name::name() (see module wpool), Module::module(), InitArgs::term(), Options::[option() (see module wpool)]) -&gt; {ok, pid()} | ignore | {error, {already_started, pid()} | term()}</name>
@@ -52,5 +52,6 @@
 </desc></func></funcs>
 
 <authors>
-<aname> </aname>
-<email> </email></authors></erlref>
+
+<aname>Fernando Benavides</aname>
+<email>elbrujohalcon@inaka.net</email></authors></erlref>

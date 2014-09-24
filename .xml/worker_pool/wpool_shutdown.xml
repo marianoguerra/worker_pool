@@ -12,9 +12,9 @@
 <rev>A</rev>
 <file>wpool_shutdown.xml</file></header>
 <module>wpool_shutdown</module>
-<modulesummary/>
+<modulesummary>A module containing the final task to execute before shutting down the node.</modulesummary>
 <description>
-</description>
+<p>A module containing the final task to execute before shutting down the node.</p></description>
 <funcs>
 <func>
 <name>final_task(Pool_Name::name() (see module wpool), Time_Allowed::pos_integer()) -&gt; ok</name>
@@ -26,5 +26,6 @@
 </desc></func></funcs>
 
 <authors>
-<aname> </aname>
-<email> </email></authors></erlref>
+
+<aname>Jay Nelson</aname>
+<email>jay@tigertext.com</email></authors></erlref>

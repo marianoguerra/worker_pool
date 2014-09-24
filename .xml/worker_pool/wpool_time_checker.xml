@@ -12,61 +12,12 @@
 <rev>A</rev>
 <file>wpool_time_checker.xml</file></header>
 <module>wpool_time_checker</module>
-<modulesummary/>
+<modulesummary>Time checker process to detect overruns on a worker pool.</modulesummary>
 <description>
-</description>
-<section><title>DATA TYPES</title><marker id="types"/>
+<p>Time checker process to detect overruns on a worker pool</p></description>
 
-<taglist>
-<tag><c>from() = {pid(), reference()}</c></tag>
-<item><marker id="type-from"/> </item>
-<tag><c>state() = #state{wpool=undefined | name() (see module wpool), handler=undefined | {atom(), atom()}}</c></tag>
-<item><marker id="type-state"/> </item>
-</taglist></section>
-<funcs>
-<func>
-<name>start_link(WPool::name() (see module wpool), Name::atom(), Handler::{atom(), atom()}) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="start_link-3"/>
- </desc></func>
-<func>
-<name>init(X1::{name() (see module wpool), {atom(), atom()}}) -&gt; {ok, state()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="init-1"/>
- </desc></func>
-<func>
-<name>terminate(Reason::atom(), State::state()) -&gt; ok</name>
-<fsummary> </fsummary>
-
-<desc><marker id="terminate-2"/>
- </desc></func>
-<func>
-<name>code_change(OldVsn::string(), State::state(), Extra::any()) -&gt; {ok, state()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="code_change-3"/>
- </desc></func>
-<func>
-<name>handle_cast(Cast::term(), State::state()) -&gt; {noreply, state()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="handle_cast-2"/>
- </desc></func>
-<func>
-<name>handle_call(Call::term(), From::from(), State::state()) -&gt; {reply, ok, state()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="handle_call-3"/>
- </desc></func>
-<func>
-<name>handle_info(Info::any(), State::state()) -&gt; {noreply, state()}</name>
-<fsummary> </fsummary>
-
-<desc><marker id="handle_info-2"/>
- </desc></func></funcs>
 
 <authors>
-<aname> </aname>
-<email> </email></authors></erlref>
+
+<aname>Fernando Benavides</aname>
+<email>elbrujohalcon@inaka.net</email></authors></erlref>
