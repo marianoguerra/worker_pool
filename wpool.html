@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module wpool</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module wpool</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Worker pool main interface.
+
+
+<h2><a name="description">Description</a></h2>Worker pool main interface. Use functions provided by this module to manage your pools of workers
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-available_worker_timeout">available_worker_timeout()</a></h3>
+<p><tt>available_worker_timeout() = timeout()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-name">name()</a></h3>
+<p><tt>name() = atom()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-option">option()</a></h3>
+<p><tt>option() = {overrun_warning, infinity | pos_integer()} | {overrun_handler, {Module::atom(), Fun::atom()}} | {workers, pos_integer()} | {worker, {Module::atom(), InitArg::term()}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-stats">stats()</a></h3>
+<p><tt>stats() = [{workers, pos_integer()} | {total_message_queue_len, non_neg_integer()} | {worker_stats, [{pos_integer(), <a href="#type-worker_stats">worker_stats()</a>}]}]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-strategy">strategy()</a></h3>
+<p><tt>strategy() = best_worker | random_worker | next_worker | available_worker</tt></p>
+
+
+<h3 class="typedecl"><a name="type-worker_stats">worker_stats()</a></h3>
+<p><tt>worker_stats() = [{messsage_queue_len, non_neg_integer()} | {memory, pos_integer()}]</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#call-2">call/2</a></td><td>Equivalent to <a href="#call-3"><tt>call(Sup, Call, default_strategy())</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#call-3">call/3</a></td><td>Equivalent to <a href="#call-4"><tt>call(Sup, Call, Strategy, 5000)</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#call-4">call/4</a></td><td>Picks a server and issues the call to it.</td></tr>
+<tr><td valign="top"><a href="#call-5">call/5</a></td><td>Picks a server and issues the call to it.</td></tr>
+<tr><td valign="top"><a href="#cast-2">cast/2</a></td><td>Equivalent to <a href="#cast-3"><tt>cast(Sup, Cast, default_strategy())</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#cast-3">cast/3</a></td><td>Picks a server and issues the cast to it.</td></tr>
+<tr><td valign="top"><a href="#default_strategy-0">default_strategy/0</a></td><td>Default strategy.</td></tr>
+<tr><td valign="top"><a href="#start-0">start/0</a></td><td>Starts the application.</td></tr>
+<tr><td valign="top"><a href="#start_pool-1">start_pool/1</a></td><td>Equivalent to <a href="#start_pool-2"><tt>start_pool(Name, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#start_pool-2">start_pool/2</a></td><td>Starts (and links) a pool of N wpool_processes.</td></tr>
+<tr><td valign="top"><a href="#start_sup_pool-1">start_sup_pool/1</a></td><td>Equivalent to <a href="#start_sup_pool-2"><tt>start_sup_pool(Name, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#start_sup_pool-2">start_sup_pool/2</a></td><td>Starts a pool of N wpool_processes under the supervision of <a href="wpool_sup.html"><code>wpool_sup</code></a></td></tr>
+<tr><td valign="top"><a href="#stats-1">stats/1</a></td><td>Retrieves a snapshot of the pool stats.</td></tr>
+<tr><td valign="top"><a href="#stop-0">stop/0</a></td><td>Stops the application.</td></tr>
+<tr><td valign="top"><a href="#stop_pool-1">stop_pool/1</a></td><td>Stops the pool.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="call-2">call/2</a></h3>
+<div class="spec">
+<p><tt>call(Sup::<a href="#type-name">name()</a>, Call::term()) -&gt; term()</tt><br></p>
+</div><p>Equivalent to <a href="#call-3"><tt>call(Sup, Call, default_strategy())</tt></a>.</p>
+
+
+<h3 class="function"><a name="call-3">call/3</a></h3>
+<div class="spec">
+<p><tt>call(Sup::<a href="#type-name">name()</a>, Call::term(), Strategy::<a href="#type-strategy">strategy()</a>) -&gt; term()</tt><br></p>
+</div><p>Equivalent to <a href="#call-4"><tt>call(Sup, Call, Strategy, 5000)</tt></a>.</p>
+
+
+<h3 class="function"><a name="call-4">call/4</a></h3>
+<div class="spec">
+<p><tt>call(Sup::<a href="#type-name">name()</a>, Call::term(), Strategy::<a href="#type-strategy">strategy()</a>, Timeout::timeout()) -&gt; term()</tt><br></p>
+</div><p>Picks a server and issues the call to it.
+       For all strategies except available_worker, Timeout applies only to the
+       time spent on the actual call to the worker, because time spent finding
+       the woker in other strategies is negligible.
+       For available_worker the time used choosing a worker is also considered</p>
+
+<h3 class="function"><a name="call-5">call/5</a></h3>
+<div class="spec">
+<p><tt>call(Sup::<a href="#type-name">name()</a>, Call::term(), Strategy::<a href="#type-strategy">strategy()</a>, Worker_Timeout::<a href="#type-available_worker_timeout">available_worker_timeout()</a>, Timeout::timeout()) -&gt; term()</tt><br></p>
+</div><p>Picks a server and issues the call to it.
+       For all strategies except available_worker, Worker_Timeout is ignored
+       For available_worker Worker_Timeout is the time used choosing a worker</p>
+
+<h3 class="function"><a name="cast-2">cast/2</a></h3>
+<div class="spec">
+<p><tt>cast(Sup::<a href="#type-name">name()</a>, Cast::term()) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#cast-3"><tt>cast(Sup, Cast, default_strategy())</tt></a>.</p>
+
+
+<h3 class="function"><a name="cast-3">cast/3</a></h3>
+<div class="spec">
+<p><tt>cast(Sup::<a href="#type-name">name()</a>, Cast::term(), Strategy::<a href="#type-strategy">strategy()</a>) -&gt; ok</tt><br></p>
+</div><p>Picks a server and issues the cast to it</p>
+
+<h3 class="function"><a name="default_strategy-0">default_strategy/0</a></h3>
+<div class="spec">
+<p><tt>default_strategy() -&gt; available_worker</tt><br></p>
+</div><p>Default strategy</p>
+
+<h3 class="function"><a name="start-0">start/0</a></h3>
+<div class="spec">
+<p><tt>start() -&gt; ok | {error, {already_started, '?MODULE'}}</tt><br></p>
+</div><p>Starts the application</p>
+
+<h3 class="function"><a name="start_pool-1">start_pool/1</a></h3>
+<div class="spec">
+<p><tt>start_pool(Name::<a href="#type-name">name()</a>) -&gt; {ok, pid()}</tt><br></p>
+</div><p>Equivalent to <a href="#start_pool-2"><tt>start_pool(Name, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="start_pool-2">start_pool/2</a></h3>
+<div class="spec">
+<p><tt>start_pool(Name::<a href="#type-name">name()</a>, Options::[<a href="#type-option">option()</a>]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</tt><br></p>
+</div><p>Starts (and links) a pool of N wpool_processes.
+       The result pid belongs to a supervisor (in case you want to add it to a supervisor tree)</p>
+
+<h3 class="function"><a name="start_sup_pool-1">start_sup_pool/1</a></h3>
+<div class="spec">
+<p><tt>start_sup_pool(Name::<a href="#type-name">name()</a>) -&gt; {ok, pid()}</tt><br></p>
+</div><p>Equivalent to <a href="#start_sup_pool-2"><tt>start_sup_pool(Name, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="start_sup_pool-2">start_sup_pool/2</a></h3>
+<div class="spec">
+<p><tt>start_sup_pool(Name::<a href="#type-name">name()</a>, Options::[<a href="#type-option">option()</a>]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</tt><br></p>
+</div><p>Starts a pool of N wpool_processes under the supervision of <a href="wpool_sup.html"><code>wpool_sup</code></a></p>
+
+<h3 class="function"><a name="stats-1">stats/1</a></h3>
+<div class="spec">
+<p><tt>stats(Sup::<a href="#type-name">name()</a>) -&gt; <a href="#type-stats">stats()</a></tt><br></p>
+</div><p>Retrieves a snapshot of the pool stats</p>
+
+<h3 class="function"><a name="stop-0">stop/0</a></h3>
+<div class="spec">
+<p><tt>stop() -&gt; ok</tt><br></p>
+</div><p>Stops the application</p>
+
+<h3 class="function"><a name="stop_pool-1">stop_pool/1</a></h3>
+<div class="spec">
+<p><tt>stop_pool(Name::<a href="#type-name">name()</a>) -&gt; ok</tt><br></p>
+</div><p>Stops the pool</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Sep 24 2014, 08:00:03.</i></p>
+</body>
+</html>
