@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+<erlref>
+<header>
+<title>wpool_queue_manager</title>
+<prepared></prepared>
+<responsible></responsible>
+<docno>1</docno>
+<approved></approved>
+<checked></checked>
+<date></date>
+<rev>A</rev>
+<file>wpool_queue_manager.xml</file></header>
+<module>wpool_queue_manager</module>
+<modulesummary/>
+<description>
+</description>
+<section><title>DATA TYPES</title><marker id="types"/>
+
+<taglist>
+<tag><c>call_request() = {available_worker, infinity | pos_integer()} | worker_counts</c></tag>
+<item><marker id="type-call_request"/> </item>
+<tag><c>from() = {pid(), reference()}</c></tag>
+<item><marker id="type-from"/> </item>
+<tag><c>pool_prop() = {pool, name() (see module wpool)}</c></tag>
+<item><marker id="type-pool_prop"/> </item>
+<tag><c>pool_props() = [pool_prop() | qm_prop()]</c></tag>
+<item><marker id="type-pool_props"/>
+<p> Not quite strict enough.</p>
+</item>
+<tag><c>qm_prop() = {queue_manager, queue_mgr()}</c></tag>
+<item><marker id="type-qm_prop"/> </item>
+<tag><c>queue_mgr() = atom()</c></tag>
+<item><marker id="type-queue_mgr"/> </item>
+<tag><c>state() = #state{wpool=undefined | name() (see module wpool), clients=undefined | queue({cast | {pid(), term()}, term()}) (see module queue), workers=undefined | set(atom()) (see module gb_sets), born=timestamp() (see module erlang)}</c></tag>
+<item><marker id="type-state"/> </item>
+<tag><c>worker_event() = new_worker | worker_dead | worker_busy | worker_ready</c></tag>
+<item><marker id="type-worker_event"/> </item>
+</taglist></section>
+<funcs>
+<func>
+<name>start_link(WPool::name() (see module wpool), Name::queue_mgr()) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="start_link-2"/>
+ </desc></func>
+<func>
+<name>available_worker(QueueManager::queue_mgr(), Timeout::timeout()) -&gt; noproc | timeout | atom()</name>
+<fsummary> </fsummary>
+
+<desc><marker id="available_worker-2"/>
+ </desc></func>
+<func>
+<name>cast_to_available_worker(QueueManager::queue_mgr(), Cast::term()) -&gt; ok</name>
+<fsummary>Casts a message to the first available worker.</fsummary>
+
+<desc><marker id="cast_to_available_worker-2"/>
+
+<p>Casts a message to the first available worker.
+       Since we can wait forever for a wpool:cast to be delivered
+       but we don't want the caller to be blocked, this function
+       just forwards the cast when it gets the worker</p>
+</desc></func>
+<func>
+<name>new_worker(QueueManager::queue_mgr(), Worker::atom()) -&gt; ok</name>
+<fsummary>Mark a brand new worker as available.</fsummary>
+
+<desc><marker id="new_worker-2"/>
+
+<p>Mark a brand new worker as available</p>
+</desc></func>
+<func>
+<name>worker_ready(QueueManager::queue_mgr(), Worker::atom()) -&gt; ok</name>
+<fsummary>Mark a worker as available.</fsummary>
+
+<desc><marker id="worker_ready-2"/>
+
+<p>Mark a worker as available</p>
+</desc></func>
+<func>
+<name>worker_busy(QueueManager::queue_mgr(), Worker::atom()) -&gt; ok</name>
+<fsummary>Mark a worker as no longer available.</fsummary>
+
+<desc><marker id="worker_busy-2"/>
+
+<p>Mark a worker as no longer available</p>
+</desc></func>
+<func>
+<name>worker_dead(QueueManager::queue_mgr(), Worker::atom()) -&gt; ok</name>
+<fsummary>Decrement the total number of workers.</fsummary>
+
+<desc><marker id="worker_dead-2"/>
+
+<p>Decrement the total number of workers</p>
+</desc></func>
+<func>
+<name>pools() -&gt; [pool_props()]</name>
+<fsummary>Return the list of currently existing worker pools.</fsummary>
+
+<desc><marker id="pools-0"/>
+
+<p>Return the list of currently existing worker pools.</p>
+</desc></func>
+<func>
+<name>stats(Pool_Name::name() (see module wpool)) -&gt; proplist() (see module proplists) | {error, {invalid_pool, name() (see module wpool)}}</name>
+<fsummary>Returns statistics for this queue.</fsummary>
+
+<desc><marker id="stats-1"/>
+
+<p>Returns statistics for this queue.</p>
+</desc></func>
+<func>
+<name>proc_info(Pool_Name::name() (see module wpool)) -&gt; proplist() (see module proplists)</name>
+<fsummary>Return a default set of process_info about workers.</fsummary>
+
+<desc><marker id="proc_info-1"/>
+
+<p>Return a default set of process_info about workers.</p>
+</desc></func>
+<func>
+<name>proc_info(Pool_Name::name() (see module wpool), Info_Type::atom() | [atom()]) -&gt; proplist() (see module proplists)</name>
+<fsummary>Return the currently executing function in the queue manager.</fsummary>
+
+<desc><marker id="proc_info-2"/>
+
+<p>Return the currently executing function in the queue manager.</p>
+</desc></func>
+<func>
+<name>trace(Pool_Name::name() (see module wpool)) -&gt; ok</name>
+<fsummary>Default tracing for 5 seconds to track worker pool execution times to error.log.</fsummary>
+
+<desc><marker id="trace-1"/>
+
+<p>Default tracing for 5 seconds to track worker pool execution times to error.log.</p>
+</desc></func>
+<func>
+<name>trace(Pool_Name::name() (see module wpool), X2::boolean(), Timeout::pos_integer()) -&gt; ok | {error, {invalid_pool, name() (see module wpool)}}</name>
+<fsummary>Turn pool tracing on and off.</fsummary>
+
+<desc><marker id="trace-3"/>
+
+<p>Turn pool tracing on and off.</p>
+</desc></func>
+<func>
+<name>init(WPool::name() (see module wpool)) -&gt; {ok, state()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="init-1"/>
+ </desc></func>
+<func>
+<name>handle_cast(X1::{worker_event(), atom()}, State::state()) -&gt; {noreply, state()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="handle_cast-2"/>
+ </desc></func>
+<func>
+<name>handle_call(X1::call_request(), Client::from(), State::state()) -&gt; {reply, {ok, atom()}, state()} | {noreply, state()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="handle_call-3"/>
+ </desc></func>
+<func>
+<name>handle_info(Info::any(), State::state()) -&gt; {noreply, state()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="handle_info-2"/>
+ </desc></func>
+<func>
+<name>terminate(Reason::atom(), State::state()) -&gt; ok</name>
+<fsummary> </fsummary>
+
+<desc><marker id="terminate-2"/>
+ </desc></func>
+<func>
+<name>code_change(OldVsn::string(), State::state(), Extra::any()) -&gt; {ok, state()}</name>
+<fsummary> </fsummary>
+
+<desc><marker id="code_change-3"/>
+ </desc></func></funcs>
+
+<authors>
+<aname> </aname>
+<email> </email></authors></erlref>

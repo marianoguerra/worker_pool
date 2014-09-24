@@ -1,0 +1,208 @@
+<module name="wpool">
+<type>
+  <name>available_worker_timeout</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-available_worker_timeout">available_worker_timeout()</marker> = timeout()</typehead></typedecl>
+</type>
+<type>
+  <name>name</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-name">name()</marker> = atom()</typehead></typedecl>
+</type>
+<type>
+  <name>option</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-option">option()</marker> = {overrun_warning, infinity | integer() &gt;= 1}<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| {overrun_handler, {Module :: atom(), Fun :: atom()}}<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| {workers, integer() &gt;= 1}<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| {worker, {Module :: atom(), InitArg :: term()}}</typehead></typedecl>
+  <anno>Fun</anno>
+  <anno>InitArg</anno>
+  <anno>Module</anno>
+</type>
+<type>
+  <name>stats</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-stats">stats()</marker> = <br/><nbsp/><nbsp/><nbsp/><nbsp/>[{workers, integer() &gt;= 1} |<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{total_message_queue_len, integer() &gt;= 0} |<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{worker_stats, [{integer() &gt;= 1, <seealso marker="#type-worker_stats">worker_stats()</seealso>}]}]</typehead></typedecl>
+</type>
+<type>
+  <name>strategy</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-strategy">strategy()</marker> = best_worker<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| random_worker<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| next_worker<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>| available_worker</typehead></typedecl>
+</type>
+<type>
+  <name>worker_stats</name>
+  <n_vars>0</n_vars>
+  <typedecl>
+      <typehead><marker id="type-worker_stats">worker_stats()</marker> = <br/><nbsp/><nbsp/><nbsp/><nbsp/>[{messsage_queue_len, integer() &gt;= 0} |<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{memory, integer() &gt;= 1}]</typehead></typedecl>
+</type>
+<spec>
+  <name>call</name>
+  <arity>2</arity>
+  <contract>
+    <clause>
+      <head>call(Sup :: <seealso marker="#type-name">name()</seealso>, Call :: term()) -&gt; term()</head></clause>
+  </contract>
+  <anno>Call</anno>
+  <anno>Sup</anno>
+</spec>
+<spec>
+  <name>call</name>
+  <arity>3</arity>
+  <contract>
+    <clause>
+      <head>call(Sup :: <seealso marker="#type-name">name()</seealso>, Call :: term(), Strategy :: <seealso marker="#type-strategy">strategy()</seealso>) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>term()</head></clause>
+  </contract>
+  <anno>Call</anno>
+  <anno>Strategy</anno>
+  <anno>Sup</anno>
+</spec>
+<spec>
+  <name>call</name>
+  <arity>4</arity>
+  <contract>
+    <clause>
+      <head>call(Sup :: <seealso marker="#type-name">name()</seealso>,<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Call :: term(),<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Strategy :: <seealso marker="#type-strategy">strategy()</seealso>,<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Timeout :: timeout()) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>term()</head></clause>
+  </contract>
+  <anno>Call</anno>
+  <anno>Strategy</anno>
+  <anno>Sup</anno>
+  <anno>Timeout</anno>
+</spec>
+<spec>
+  <name>call</name>
+  <arity>5</arity>
+  <contract>
+    <clause>
+      <head>call(Sup :: <seealso marker="#type-name">name()</seealso>,<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Call :: term(),<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Strategy :: <seealso marker="#type-strategy">strategy()</seealso>,<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Worker_Timeout :: <seealso marker="#type-available_worker_timeout">available_worker_timeout()</seealso>,<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>Timeout :: timeout()) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>term()</head></clause>
+  </contract>
+  <anno>Call</anno>
+  <anno>Strategy</anno>
+  <anno>Sup</anno>
+  <anno>Timeout</anno>
+  <anno>Worker_Timeout</anno>
+</spec>
+<spec>
+  <name>cast</name>
+  <arity>2</arity>
+  <contract>
+    <clause>
+      <head>cast(Sup :: <seealso marker="#type-name">name()</seealso>, Cast :: term()) -&gt; ok</head></clause>
+  </contract>
+  <anno>Cast</anno>
+  <anno>Sup</anno>
+</spec>
+<spec>
+  <name>cast</name>
+  <arity>3</arity>
+  <contract>
+    <clause>
+      <head>cast(Sup :: <seealso marker="#type-name">name()</seealso>, Cast :: term(), Strategy :: <seealso marker="#type-strategy">strategy()</seealso>) -&gt; ok</head></clause>
+  </contract>
+  <anno>Cast</anno>
+  <anno>Strategy</anno>
+  <anno>Sup</anno>
+</spec>
+<spec>
+  <name>default_strategy</name>
+  <arity>0</arity>
+  <contract>
+    <clause>
+      <head>default_strategy() -&gt; available_worker</head></clause>
+  </contract>
+</spec>
+<spec>
+  <name>start</name>
+  <arity>0</arity>
+  <contract>
+    <clause>
+      <head>start() -&gt; ok | {error, {already_started, wpool}}</head></clause>
+  </contract>
+</spec>
+<spec>
+  <name>start</name>
+  <arity>2</arity>
+  <contract>
+    <clause>
+      <head>start(StartType :: any(), StartArgs :: any()) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{ok, pid()} | {error, term()}</head></clause>
+  </contract>
+  <anno>StartArgs</anno>
+  <anno>StartType</anno>
+</spec>
+<spec>
+  <name>start_pool</name>
+  <arity>1</arity>
+  <contract>
+    <clause>
+      <head>start_pool(Name :: <seealso marker="#type-name">name()</seealso>) -&gt; {ok, pid()}</head></clause>
+  </contract>
+  <anno>Name</anno>
+</spec>
+<spec>
+  <name>start_pool</name>
+  <arity>2</arity>
+  <contract>
+    <clause>
+      <head>start_pool(Name :: <seealso marker="#type-name">name()</seealso>, Options :: [<seealso marker="#type-option">option()</seealso>]) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{ok, pid()} |<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{error, {already_started, pid()} | term()}</head></clause>
+  </contract>
+  <anno>Name</anno>
+  <anno>Options</anno>
+</spec>
+<spec>
+  <name>start_sup_pool</name>
+  <arity>1</arity>
+  <contract>
+    <clause>
+      <head>start_sup_pool(Name :: <seealso marker="#type-name">name()</seealso>) -&gt; {ok, pid()}</head></clause>
+  </contract>
+  <anno>Name</anno>
+</spec>
+<spec>
+  <name>start_sup_pool</name>
+  <arity>2</arity>
+  <contract>
+    <clause>
+      <head>start_sup_pool(Name :: <seealso marker="#type-name">name()</seealso>, Options :: [<seealso marker="#type-option">option()</seealso>]) -&gt;<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{ok, pid()} |<br/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/><nbsp/>{error, {already_started, pid()} | term()}</head></clause>
+  </contract>
+  <anno>Name</anno>
+  <anno>Options</anno>
+</spec>
+<spec>
+  <name>stats</name>
+  <arity>1</arity>
+  <contract>
+    <clause>
+      <head>stats(Sup :: <seealso marker="#type-name">name()</seealso>) -&gt; <seealso marker="#type-stats">stats()</seealso></head></clause>
+  </contract>
+  <anno>Sup</anno>
+</spec>
+<spec>
+  <name>stop</name>
+  <arity>0</arity>
+  <contract>
+    <clause>
+      <head>stop() -&gt; ok</head></clause>
+  </contract>
+</spec>
+<spec>
+  <name>stop</name>
+  <arity>1</arity>
+  <contract>
+    <clause>
+      <head>stop(State :: any()) -&gt; ok</head></clause>
+  </contract>
+  <anno>State</anno>
+</spec>
+<spec>
+  <name>stop_pool</name>
+  <arity>1</arity>
+  <contract>
+    <clause>
+      <head>stop_pool(Name :: <seealso marker="#type-name">name()</seealso>) -&gt; ok</head></clause>
+  </contract>
+  <anno>Name</anno>
+</spec>
+<timestamp>Generated by EDoc, Sep 24 2014, 08:08:27.</timestamp>
+</module>

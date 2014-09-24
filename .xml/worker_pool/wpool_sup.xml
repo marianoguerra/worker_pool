@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+<erlref>
+<header>
+<title>wpool_sup</title>
+<prepared></prepared>
+<responsible></responsible>
+<docno>1</docno>
+<approved></approved>
+<checked></checked>
+<date></date>
+<rev>A</rev>
+<file>wpool_sup.xml</file></header>
+<module>wpool_sup</module>
+<modulesummary>Worker Pool Main Supervisor.</modulesummary>
+<description>
+<p>Worker Pool Main Supervisor</p></description>
+<funcs>
+<func>
+<name>start_link() -&gt; {ok, pid()}</name>
+<fsummary>Starts the supervisor.</fsummary>
+
+<desc><marker id="start_link-0"/>
+
+<p>Starts the supervisor</p>
+</desc></func>
+<func>
+<name>start_pool(Name::name() (see module wpool), Options::[option() (see module wpool)]) -&gt; {ok, pid()}</name>
+<fsummary>Starts a new pool.</fsummary>
+
+<desc><marker id="start_pool-2"/>
+
+<p>Starts a new pool</p>
+</desc></func>
+<func>
+<name>stop_pool(Name::name() (see module wpool)) -&gt; ok</name>
+<fsummary>Stops a pool.</fsummary>
+
+<desc><marker id="stop_pool-1"/>
+
+<p>Stops a pool</p>
+</desc></func></funcs>
+
+<authors>
+
+<aname>Fernando Benavides</aname>
+<email>elbrujohalcon@inaka.net</email></authors></erlref>

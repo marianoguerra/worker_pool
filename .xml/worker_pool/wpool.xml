@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+<erlref>
+<header>
+<title>wpool</title>
+<prepared></prepared>
+<responsible></responsible>
+<docno>1</docno>
+<approved></approved>
+<checked></checked>
+<date></date>
+<rev>A</rev>
+<file>wpool.xml</file></header>
+<module>wpool</module>
+<modulesummary>Worker pool main interface.</modulesummary>
+<description>
+<p>Worker pool main interface. Use functions provided by this module to manage your pools of workers</p></description>
+<section><title>DATA TYPES</title><marker id="types"/>
+
+<taglist>
+<tag><c>available_worker_timeout() = timeout()</c></tag>
+<item><marker id="type-available_worker_timeout"/> </item>
+<tag><c>name() = atom()</c></tag>
+<item><marker id="type-name"/> </item>
+<tag><c>option() = {overrun_warning, infinity | pos_integer()} | {overrun_handler, {Module::atom(), Fun::atom()}} | {workers, pos_integer()} | {worker, {Module::atom(), InitArg::term()}}</c></tag>
+<item><marker id="type-option"/> </item>
+<tag><c>stats() = [{workers, pos_integer()} | {total_message_queue_len, non_neg_integer()} | {worker_stats, [{pos_integer(), worker_stats()}]}]</c></tag>
+<item><marker id="type-stats"/> </item>
+<tag><c>strategy() = best_worker | random_worker | next_worker | available_worker</c></tag>
+<item><marker id="type-strategy"/> </item>
+<tag><c>worker_stats() = [{messsage_queue_len, non_neg_integer()} | {memory, pos_integer()}]</c></tag>
+<item><marker id="type-worker_stats"/> </item>
+</taglist></section>
+<funcs>
+<func>
+<name>start() -&gt; ok | {error, {already_started, wpool}}</name>
+<fsummary>Starts the application.</fsummary>
+
+<desc><marker id="start-0"/>
+
+<p>Starts the application</p>
+</desc></func>
+<func>
+<name>stop() -&gt; ok</name>
+<fsummary>Stops the application.</fsummary>
+
+<desc><marker id="stop-0"/>
+
+<p>Stops the application</p>
+</desc></func>
+<func>
+<name>start_pool(Name::name()) -&gt; {ok, pid()}</name>
+<fsummary>Equivalent to start_pool(Name, []).
+</fsummary>
+
+<desc><marker id="start_pool-1"/>
+<p>Equivalent to <seealso marker="#start_pool-2">start_pool(Name, [])</seealso>.</p>
+</desc></func>
+<func>
+<name>start_pool(Name::name(), Options::[option()]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
+<fsummary>Starts (and links) a pool of N wpool_processes.</fsummary>
+
+<desc><marker id="start_pool-2"/>
+
+<p>Starts (and links) a pool of N wpool_processes.
+       The result pid belongs to a supervisor (in case you want to add it to a supervisor tree)</p>
+</desc></func>
+<func>
+<name>start_sup_pool(Name::name()) -&gt; {ok, pid()}</name>
+<fsummary>Equivalent to start_sup_pool(Name, []).
+</fsummary>
+
+<desc><marker id="start_sup_pool-1"/>
+<p>Equivalent to <seealso marker="#start_sup_pool-2">start_sup_pool(Name, [])</seealso>.</p>
+</desc></func>
+<func>
+<name>start_sup_pool(Name::name(), Options::[option()]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
+<fsummary>Starts a pool of N wpool_processes under the supervision of wpool_sup</fsummary>
+
+<desc><marker id="start_sup_pool-2"/>
+
+<p>Starts a pool of N wpool_processes under the supervision of <seealso marker="wpool_sup">wpool_sup</seealso></p>
+</desc></func>
+<func>
+<name>stop_pool(Name::name()) -&gt; ok</name>
+<fsummary>Stops the pool.</fsummary>
+
+<desc><marker id="stop_pool-1"/>
+
+<p>Stops the pool</p>
+</desc></func>
+<func>
+<name>default_strategy() -&gt; available_worker</name>
+<fsummary>Default strategy.</fsummary>
+
+<desc><marker id="default_strategy-0"/>
+
+<p>Default strategy</p>
+</desc></func>
+<func>
+<name>call(Sup::name(), Call::term()) -&gt; term()</name>
+<fsummary>Equivalent to call(Sup, Call, default_strategy()).
+</fsummary>
+
+<desc><marker id="call-2"/>
+<p>Equivalent to <seealso marker="#call-3">call(Sup, Call, default_strategy())</seealso>.</p>
+</desc></func>
+<func>
+<name>call(Sup::name(), Call::term(), Strategy::strategy()) -&gt; term()</name>
+<fsummary>Equivalent to call(Sup, Call, Strategy, 5000).
+</fsummary>
+
+<desc><marker id="call-3"/>
+<p>Equivalent to <seealso marker="#call-4">call(Sup, Call, Strategy, 5000)</seealso>.</p>
+</desc></func>
+<func>
+<name>call(Sup::name(), Call::term(), Strategy::strategy(), Timeout::timeout()) -&gt; term()</name>
+<fsummary>Picks a server and issues the call to it.</fsummary>
+
+<desc><marker id="call-4"/>
+
+<p>Picks a server and issues the call to it.
+       For all strategies except available_worker, Timeout applies only to the
+       time spent on the actual call to the worker, because time spent finding
+       the woker in other strategies is negligible.
+       For available_worker the time used choosing a worker is also considered</p>
+</desc></func>
+<func>
+<name>call(Sup::name(), Call::term(), Strategy::strategy(), Worker_Timeout::available_worker_timeout(), Timeout::timeout()) -&gt; term()</name>
+<fsummary>Picks a server and issues the call to it.</fsummary>
+
+<desc><marker id="call-5"/>
+
+<p>Picks a server and issues the call to it.
+       For all strategies except available_worker, Worker_Timeout is ignored
+       For available_worker Worker_Timeout is the time used choosing a worker</p>
+</desc></func>
+<func>
+<name>cast(Sup::name(), Cast::term()) -&gt; ok</name>
+<fsummary>Equivalent to cast(Sup, Cast, default_strategy()).
+</fsummary>
+
+<desc><marker id="cast-2"/>
+<p>Equivalent to <seealso marker="#cast-3">cast(Sup, Cast, default_strategy())</seealso>.</p>
+</desc></func>
+<func>
+<name>cast(Sup::name(), Cast::term(), Strategy::strategy()) -&gt; ok</name>
+<fsummary>Picks a server and issues the cast to it.</fsummary>
+
+<desc><marker id="cast-3"/>
+
+<p>Picks a server and issues the cast to it</p>
+</desc></func>
+<func>
+<name>stats(Sup::name()) -&gt; stats()</name>
+<fsummary>Retrieves a snapshot of the pool stats.</fsummary>
+
+<desc><marker id="stats-1"/>
+
+<p>Retrieves a snapshot of the pool stats</p>
+</desc></func></funcs>
+
+<authors>
+<aname> </aname>
+<email> </email></authors></erlref>
