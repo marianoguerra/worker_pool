@@ -14,7 +14,8 @@
 <module>wpool</module>
 <modulesummary>Worker pool main interface.</modulesummary>
 <description>
-<p>Worker pool main interface. Use functions provided by this module to manage your pools of workers</p></description>
+<p>Worker pool main interface.
+        Use functions provided by this module to manage your pools of workers</p></description>
 <section><title>DATA TYPES</title><marker id="types"/>
 
 <taglist>
@@ -63,7 +64,8 @@
 <desc><marker id="start_pool-2"/>
 
 <p>Starts (and links) a pool of N wpool_processes.
-       The result pid belongs to a supervisor (in case you want to add it to a supervisor tree)</p>
+       The result pid belongs to a supervisor (in case you want to add it to a
+       supervisor tree)</p>
 </desc></func>
 <func>
 <name>start_sup_pool(Name::name()) -&gt; {ok, pid()}</name>
@@ -75,11 +77,11 @@
 </desc></func>
 <func>
 <name>start_sup_pool(Name::name(), Options::[option()]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
-<fsummary>Starts a pool of N wpool_processes under the supervision of wpool_sup</fsummary>
+<fsummary>Starts a pool of N wpool_processes supervised by wpool_sup</fsummary>
 
 <desc><marker id="start_sup_pool-2"/>
 
-<p>Starts a pool of N wpool_processes under the supervision of <seealso marker="wpool_sup">wpool_sup</seealso></p>
+<p>Starts a pool of N wpool_processes supervised by <seealso marker="wpool_sup">wpool_sup</seealso></p>
 </desc></func>
 <func>
 <name>stop_pool(Name::name()) -&gt; ok</name>

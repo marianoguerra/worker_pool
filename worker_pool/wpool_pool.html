@@ -29,7 +29,8 @@
 <h1>wpool_pool</h1>
 <h2 class="modsummary">A pool of workers.</h2>
 <div class="description">
-<p>A pool of workers. If you want to put it in your supervisor tree, remember it's a supervisor.</p></div>
+<p>A pool of workers. If you want to put it in your supervisor tree,
+        remember it's a supervisor.</p></div>
 <div id="functions" class="category"><h4><a href="#functions">Functions</a></h4><hr />
 <div class="function">
 <h3 id="create_table/0">create_table() -&gt; ok</h3>
@@ -37,7 +38,7 @@
 
 <div class="description">
 
-<p>Creates the ets table that will hold the information about currently active pools</p>
+<p>Creates the ets table that will hold the information about active pools</p>
 </div></div>
 <div class="function">
 <h3 id="start_link/1">start_link(Name::name() (see module wpool), Options::[option() (see module wpool)]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</h3>
@@ -53,8 +54,7 @@
 
 <div class="description">
 
-<p>Picks the worker with the smaller queue of messages.
-       Based on <url href="http://lethain.com/load-balancing-across-erlang-process-groups/">http://lethain.com/load-balancing-across-erlang-process-groups/</url></p>
+<p>Picks the worker with the smaller queue of messages.</p>
 </div></div>
 <div class="function">
 <h3 id="random_worker/1">random_worker(Sup::name() (see module wpool)) -&gt; atom()</h3>

@@ -14,15 +14,16 @@
 <module>wpool_pool</module>
 <modulesummary>A pool of workers.</modulesummary>
 <description>
-<p>A pool of workers. If you want to put it in your supervisor tree, remember it's a supervisor.</p></description>
+<p>A pool of workers. If you want to put it in your supervisor tree,
+        remember it's a supervisor.</p></description>
 <funcs>
 <func>
 <name>create_table() -&gt; ok</name>
-<fsummary>Creates the ets table that will hold the information about currently active pools.</fsummary>
+<fsummary>Creates the ets table that will hold the information about active pools.</fsummary>
 
 <desc><marker id="create_table-0"/>
 
-<p>Creates the ets table that will hold the information about currently active pools</p>
+<p>Creates the ets table that will hold the information about active pools</p>
 </desc></func>
 <func>
 <name>start_link(Name::name() (see module wpool), Options::[option() (see module wpool)]) -&gt; {ok, pid()} | {error, {already_started, pid()} | term()}</name>
@@ -38,8 +39,7 @@
 
 <desc><marker id="best_worker-1"/>
 
-<p>Picks the worker with the smaller queue of messages.
-       Based on <url href="http://lethain.com/load-balancing-across-erlang-process-groups/">http://lethain.com/load-balancing-across-erlang-process-groups/</url></p>
+<p>Picks the worker with the smaller queue of messages.</p>
 </desc></func>
 <func>
 <name>random_worker(Sup::name() (see module wpool)) -&gt; atom()</name>
