@@ -1,4 +1,0 @@
-%% encoding: UTF-8
-{application,worker_pool}.
-{packages,[]}.
-{modules,[wpool,wpool_pool,wpool_process,wpool_worker]}.
