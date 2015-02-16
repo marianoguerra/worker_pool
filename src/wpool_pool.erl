@@ -21,7 +21,8 @@
 
 %% API
 -export([start_link/2, create_table/0]).
--export([best_worker/1, random_worker/1, next_worker/1, available_worker/2]).
+-export([best_worker/1, random_worker/1, next_worker/1, custom/2,
+         available_worker/2]).
 -export([cast_to_available_worker/2]).
 -export([stats/1, wpool_size/1, worker_names/1]).
 
@@ -80,6 +81,20 @@ next_worker(Sup) ->
   case move_wpool(Sup) of
     undefined -> throw(no_workers);
     Next -> worker_name(Sup, Next)
+  end.
+
+%% @doc Calls a user provided stratedy
+%% @throws no_workers
+%% @throws no_custom_strategy
+-spec custom(wpool:name(), term()) -> atom().
+custom(Sup, Call) ->
+  case find_wpool(Sup) of
+    undefined -> throw(no_workers);
+    Wpool ->
+          case proplists:get_value(strategy_handler, Wpool#wpool.opts) of
+              undefined -> throw(no_custom_strategy);
+              Fun -> Fun(Sup, Call, Wpool)
+          end
   end.
 
 %% @doc Picks the first available worker.

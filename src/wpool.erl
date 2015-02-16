@@ -23,14 +23,18 @@
                   ]).
 
 -type name() :: atom().
+% XXX the third fun arg is Wpool, I don't know the type
+-type custom_strategy_handler() :: fun((name(), term(), term()) -> atom()).
 -type option() :: {overrun_warning, infinity|pos_integer()}
                 | {overrun_handler, {Module::atom(), Fun::atom()}}
                 | {workers, pos_integer()}
-                | {worker, {Module::atom(), InitArg::term()}}.
+                | {worker, {Module::atom(), InitArg::term()}}
+                | {strategy_handler, custom_strategy_handler()}.
 -type strategy() :: best_worker 
                   | random_worker
                   | next_worker
-                  | available_worker.
+                  | available_worker
+                  | custom.
 -type worker_stats() :: [ {messsage_queue_len, non_neg_integer()}
                         | {memory, pos_integer()}
                         ].
@@ -122,6 +126,9 @@ call(Sup, Call, Strategy) -> call(Sup, Call, Strategy, 5000).
 call(Sup, Call, available_worker, infinity) ->
   wpool_process:call(
     wpool_pool:available_worker(Sup, infinity), Call, infinity);
+call(Sup, Call, custom, Timeout) ->
+    wpool_process:call(
+      wpool_pool:custom(Sup, Call), Call, Timeout);
 call(Sup, Call, available_worker, Timeout) ->
   {Elapsed, Worker} = timer:tc(wpool_pool, available_worker, [Sup, Timeout]),
   % Since the Timeout is a general constraint, we have to deduce the time
